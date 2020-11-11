@@ -1,0 +1,37 @@
+<div class="control-panel">
+    <button
+      *ngIf="!isLogin"
+      type="button"
+      (click)="singIn()"
+    >singIn</button>
+    <button
+      *ngIf="isLogin && !firstUpload"
+      type="button"
+      (click)="getImages()"
+    >Get Images</button>
+    <button
+      *ngIf="isLogin && firstUpload"
+      type="button"
+      (click)="showMoreImages(pageNumber + 1)"
+    >Show More</button>
+</div>
+
+
+
+<ng-container *ngIf="imgArr.length">
+  <div class="img__container">
+    <div class="img__item" *ngFor="let image of imgArr; let i = index" (click)="openImage(image.id, i)">
+      <img [src]="image.cropped_picture">
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="showSlider">
+  <app-image-slider
+    (showSlide)="showSlider = $event"
+    (slideEvent)="slideImage($event)"
+    [imgArr]="imgArr"
+    [openedCurImgId] = 'openedCurImgId'
+    [openedCurIndex] = 'openedCurIndex'
+  ></app-image-slider>
+</ng-container>

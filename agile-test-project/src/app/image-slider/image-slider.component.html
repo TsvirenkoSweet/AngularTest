@@ -1,0 +1,40 @@
+<div class="slider">
+  <div class="slider__container">
+    <div class="slider__image-list">
+      <button class="slider__close" (click)="closeSlider(false)">×</button>
+      <button
+        class="slider__prev"
+        *ngIf="currentImgIndex - 1 >= 0"
+        (click)="slideImage(currentImgIndex - 1)"
+      >Prev</button>
+      <div
+        class="slider__image-container"
+        *ngFor="let img of imgArr"
+        [ngClass]="{
+          hideSlide: img.id != openedCurImgId,
+          activeSlide: img.id === openedCurImgId
+        }"
+      >
+        <pinch-zoom [autoHeight]="true">
+          <img class="slider__image" [ngStyle]="{maxHeight:'100vh'}" [src]="img && img.imageDetail && img.imageDetail[0].full_picture">
+        </pinch-zoom>
+        <div class="slider__image-overlay">
+          <div class="slider__image-overlay-author">
+            {{img && img.imageDetail && img.imageDetail[0].author}}
+          </div>
+          <div class="slider__image-overlay-camera">
+            {{img && img.imageDetail && img.imageDetail[0].camera}}
+          </div>
+          <div class="slider__image-overlay-tags">
+            {{img && img.imageDetail && img.imageDetail[0].tags}}
+          </div>
+        </div>
+      </div>
+      <button
+        class="slider__next"
+        *ngIf="currentImgIndex + 1 < imgArr.length"
+        (click)="slideImage(currentImgIndex + 1)"
+      >Next</button>
+    </div>
+  </div>
+</div>

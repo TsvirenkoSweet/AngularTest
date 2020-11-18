@@ -1,5 +1,5 @@
-import {Component, Input, Output, EventEmitter, ViewChild, OnInit} from '@angular/core';
-import {Picture} from "../app.component";
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Picture } from '../app.component';
 
 @Component({
   selector: 'app-image-slider',
@@ -8,26 +8,25 @@ import {Picture} from "../app.component";
 })
 export class ImageSliderComponent implements OnInit{
 
-  @Input() imgArr: Array<Picture> = [];
-  @Input() openedCurImgId: string;
-  @Input() openedCurIndex: number;
-  @Output() showSlide: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() slideEvent: EventEmitter<number> = new EventEmitter<number>();
-  currentImgIndex: number;
+  @Input() public imgArr: Array<Picture> = [];
+  @Input() public openedCurImgId: string;
+  @Input() public openedCurIndex: number;
+  @Output() public showSlide: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() public slideEvent: EventEmitter<number> = new EventEmitter<number>();
+  public currentImgIndex: number;
 
   constructor() { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.currentImgIndex = this.openedCurIndex;
   }
 
-  closeSlider(flag: boolean) {
+  public closeSlider(flag: boolean): void {
     this.showSlide.emit(flag);
   }
 
-  slideImage(imgIndex: number) {
+  public slideImage(imgIndex: number): void {
     this.currentImgIndex = imgIndex;
     this.slideEvent.emit(this.currentImgIndex);
   }
-
 }

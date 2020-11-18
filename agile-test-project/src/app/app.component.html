@@ -16,8 +16,6 @@
     >Show More</button>
 </div>
 
-
-
 <ng-container *ngIf="imgArr.length">
   <div class="img__container">
     <div class="img__item" *ngFor="let image of imgArr; let i = index" (click)="openImage(image.id, i)">
